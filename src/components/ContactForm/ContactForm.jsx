@@ -8,7 +8,6 @@ export const ContactForm = ({ onAdd }) => {
         name: '',
         number: '',
       }}
-      
       onSubmit={(values, actions) => {
         onAdd(values);
         actions.resetForm();

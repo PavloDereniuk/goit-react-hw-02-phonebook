@@ -3,6 +3,7 @@ import { nanoid } from 'nanoid';
 import { ContactForm } from './ContactForm/ContactForm';
 import { ContactList } from './ContactList/ContactList';
 import { Filter } from './Filter/Filter';
+import { Container } from './General.styled';
 
 export class App extends Component {
   state = {
@@ -27,9 +28,28 @@ export class App extends Component {
       id: nanoid(),
     };
 
+    let contactExists = false;
+
+    this.state.contacts.map(contacts => {
+      if (contacts.name === contact.name) {
+        contactExists = true;
+        window.alert(`${contacts.name} is alredy in contacts.`);
+      }
+    });
+
+    if (!contactExists) {
+      this.setState(prevState => {
+        return {
+          contacts: [...prevState.contacts, contact],
+        };
+      });
+    }
+  };
+
+  deleteContact = contactID => {
     this.setState(prevState => {
       return {
-        contacts: [...prevState.contacts, contact],
+        contacts: prevState.contacts.filter(item => item.id !== contactID),
       };
     });
   };
@@ -44,13 +64,15 @@ export class App extends Component {
     });
 
     return (
-      <>
+      <Container>
         <h1>Phonebook</h1>
         <ContactForm onAdd={this.addContact} />
         <h2>Contacts</h2>
         <Filter filters={filter} onUpdateFilter={this.updateFilter} />
-        {contacts.length > 0 && <ContactList data={filteredData} />}
-      </>
+        {contacts.length > 0 && (
+          <ContactList data={filteredData} onDelete={this.deleteContact} />
+        )}
+      </Container>
     );
   }
 }

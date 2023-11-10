@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ContactListWrapper = styled.ul`
-display: flex;
-flex-direction: column;
-gap: 10px;
-`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
