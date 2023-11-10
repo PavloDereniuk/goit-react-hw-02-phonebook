@@ -35,6 +35,7 @@ export class App extends Component {
         contactExists = true;
         window.alert(`${contacts.name} is alredy in contacts.`);
       }
+      return contacts.name;
     });
 
     if (!contactExists) {
